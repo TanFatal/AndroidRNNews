@@ -11,7 +11,8 @@ import {
 import React, {useEffect, useState} from 'react';
 import NewsServices from '../common/api/service';
 
-export default function News({ navigation }) {
+export default function News({ navigation, route }) {
+  const { categoryId } = route.params;
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [isReLoad, setIsReload] = useState(false);
@@ -20,11 +21,11 @@ export default function News({ navigation }) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [categoryId]);
 
   const getData = () => {
     setIsReload(true);
-    NewsServices.getArticles({ categoryId: 26, page: 1, pageSize: 10 })
+    NewsServices.getArticles({ categoryId, page: 1, pageSize: 10 })
       .then(res => {
         setData(res);
         if (res?.length > 0) {
@@ -43,7 +44,7 @@ export default function News({ navigation }) {
   const getMore = () => {
     if (isLoadMore) {
       setIsLoading(true);
-      NewsServices.getArticles({ categoryId: 26, page: page + 1, pageSize: 10 })
+      NewsServices.getArticles({ categoryId, page: page + 1, pageSize: 10 })
         .then(res => {
           if (res?.length > 0) {
             setIsLoadMore(true);
@@ -64,7 +65,9 @@ export default function News({ navigation }) {
 
   const Item = ({ item }) => {
     return (
-      <TouchableOpacity activeOpacity={0.9} style={styles.item}>
+      <TouchableOpacity activeOpacity={0.9}
+      onPress={() => navigation.navigate('NewsDetail',{articleId:item?.Id})}
+      style={styles.item}>
         <Image style={styles.img} source={{ uri: item?.ImageLink }} />
         <View style={styles.contentItem}>
           <Text style={styles.title}>{item?.Title}</Text>
@@ -85,7 +88,7 @@ export default function News({ navigation }) {
   const ItemHeader = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation?.navigate('NewsDetail')}
+        onPress={() => navigation.navigate('NewsDetail', item?.Id)}
         activeOpacity={0.9}
         style={styles.itemHeader}
       >

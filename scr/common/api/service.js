@@ -1,23 +1,6 @@
 import { API_URL_DANTRI, BASE_API } from '.';
 import instance from '../api/axios';
 import axios from '../api/axios';
-// export default class NewsServices{
-//     static getArticles = async({categoryId , page , pageSize})  => {
-//         return instance.get(API_URL_DANTRI,BASE_API.getListFootballNews, {
-//           params: { 
-//             categoryId: categoryId,
-//             page:page, 
-//             pageSize:pageSize }
-//         });
-//       }
-//       static getExtractArticleContentById = async({articleId})  => {
-//         return instance.get(API_URL_DANTRI,BASE_API.getListFootballNews, {
-//           params: { 
-//             articleId:articleId,
-//              }
-//         });
-//       }
-// };
 
 export default class NewsServices {
   static getArticles = async ({ categoryId, page, pageSize }) => {
@@ -31,7 +14,7 @@ export default class NewsServices {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching articles:', error);
+      console.error('Lỗi không fetch được data', error);
       throw error;
     }
   }
