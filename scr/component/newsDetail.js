@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import NewsServices from '../common/api/service';
@@ -16,6 +17,7 @@ const NewsDetail = ({route}) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { articleId } = route.params;
+  const{width} = useWindowDimensions();
   useEffect(() => {
     getDataDetail();
   }, [articleId]);
@@ -39,7 +41,7 @@ const NewsDetail = ({route}) => {
   };
 
   const ItemImage = ({ img }) => {
-    return <Image style={{ height: 200, width: '100%' }} source={{ uri: img }} />;
+    return <Image style={{ height: 200, width: {width} }} source={{ uri: img }} />;
   };
 
   const Item = ({ item }) => {
@@ -56,19 +58,21 @@ const NewsDetail = ({route}) => {
   return (
     <View
       statusBarProps={{ backgroundColor: 'black', barStyle: 'light-content' }}
-      style={{ flex: 1, backgroundColor: '#FFFFFF' }}
+      style={{ flex: 1, backgroundColor: '#ffffff',alignItems:'center' }}
     >
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={(_, idx) => idx.toString()}
-          renderItem={({ item }) => {
-            return <Item item={item} />;
-          }}
-        />
-      )}
+      <View style={{width:'95%'} }>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" style={{ flex: 1 }} />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={(_, idx) => idx.toString()}
+            renderItem={({ item }) => {
+              return <Item item={item} />;
+            }}
+          />
+        )}
+      </View>
     </View>
   );
 };

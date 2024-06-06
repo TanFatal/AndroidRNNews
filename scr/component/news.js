@@ -88,7 +88,7 @@ export default function News({ navigation, route }) {
   const ItemHeader = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate('NewsDetail', item?.Id)}
+      onPress={() => navigation.navigate('NewsDetail',{articleId:item?.Id})}
         activeOpacity={0.9}
         style={styles.itemHeader}
       >
