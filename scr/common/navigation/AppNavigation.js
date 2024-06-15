@@ -10,14 +10,13 @@ const Stack =createNativeStackNavigator();
 
 export default RootComponent = function(){
   return(
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown:false}}>
+  <NavigationContainer>
+      <Stack.Navigator initialRouteName='Start' screenOptions={{headerShown:false}}>
         <Stack.Screen name="Start" component={Start} />
-        <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Home" component={TabNavigation}/>
         <Stack.Screen name="HomeDrawer" component={DrawerNavigator}/>
-        <Stack.Screen name="NewsDetail" component={NewsDetail}/>
+        <Stack.Screen name="NewsDetail" options={{headerShown:true,title:'Nội dung bài viết',headerStyle:{backgroundColor:'#0F6DDC'}}} component={NewsDetail}/>
       </Stack.Navigator>
-    </NavigationContainer>
+  </NavigationContainer>
   )
 }

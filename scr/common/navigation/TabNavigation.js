@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text ,Button,Image} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import News from '../../component/news';
-import NewsDetail from '../../component/newsDetail';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,6 +12,7 @@ const TabNavigation=()=> {
         headerShown:false, 
         tabBarLabelStyle:{fontSize:16,paddingBottom:5},
         tabBarStyle:{height:70}
+        
         }}>
         <Tab.Screen name="Tin tức" component={News} initialParams={{ categoryId: 0 }} options={{
           tabBarIcon:()=>(
@@ -38,8 +38,8 @@ const TabNavigation=()=> {
             <Image source={require('../../assets/showbizIcon.png')} style={{width:30,height:30,resizeMode:'stretch'}}/>
           )
         }}/>
-        <Tab.Screen name="Giáo dục" component={News} initialParams={{ categoryId: 25 }} options={{
-          tabBarLabel:'Giáo dục',
+        <Tab.Screen name="Lưu trữ" component={News} initialParams={{ categoryId: 25 }} options={{
+          tabBarLabel:'Học đường',
           tabBarIcon:()=>(
             <Image source={require('../../assets/schoolIcon.png')} style={{width:30,height:30,resizeMode:'stretch'}}/>
           )

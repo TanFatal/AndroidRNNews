@@ -57,7 +57,6 @@ const NewsDetail = ({route}) => {
 
   return (
     <View
-      statusBarProps={{ backgroundColor: 'black', barStyle: 'light-content' }}
       style={{ flex: 1, backgroundColor: '#ffffff',alignItems:'center' }}
     >
       <View style={{width:'95%'} }>
